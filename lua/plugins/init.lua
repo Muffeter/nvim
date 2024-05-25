@@ -25,6 +25,11 @@ return {
   		},
   	},
   },
+  {
+    "Muffeter/pluto.nvim",
+    lazy = false,
+    opts = {}
+  }
   --
   -- {
   -- 	"nvim-treesitter/nvim-treesitter",
