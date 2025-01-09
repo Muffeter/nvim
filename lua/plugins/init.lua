@@ -35,7 +35,7 @@ return {
     keys = {
       { "<leader>t5", "<Plug>VimspectorContinue", desc="continue"},
       { "<leader>t3", "<Plug>VimspectorStop", desc="stop"},
-      { "<leader>t2", "<Plug>VimspectorToggleBreakpoint", desc="stop"},
+      { "<leader>t2", "<Plug>VimspectorToggleBreakpoint", desc="toggle breakpoint"},
       { "<leader>t4", "<Plug>VimspectorRestart", desc="restart"}
     },
     config = function ()
