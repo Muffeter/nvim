@@ -11,6 +11,7 @@ map('i', '<C-i>', 'copilot#Accept("\\<CR>")', {
   replace_keycodes = false
 })
 
+map("t", "<c-space>", "<C-\\><C-n>")
 print("hi")
 vim.g.copilot_no_tab_map = true
 
