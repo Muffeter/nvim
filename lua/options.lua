@@ -16,3 +16,4 @@ for _, plugin in pairs(enable_providers) do
 end
 
 vim.g.vimspector_base_dir='C:/Users/ming/AppData/Local/nvim-data/lazy/vimspector'
+require 'nvim-treesitter.install'.compilers = { "gcc" }

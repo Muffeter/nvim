@@ -41,6 +41,10 @@ return {
     config = function ()
       vim.g.vimspector_enable_mappings = 'HUMAN'
     end,
+  },
+  {
+    'github/copilot.vim',
+    lazy=false
   }
   --
   -- {
