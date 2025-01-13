@@ -26,7 +26,7 @@ for _, lsp in ipairs(servers) do
 		-- on_attach = on_attach,
     on_attach = my_on_attach,
 		on_init = on_init,
-		capabilities = capabilities,
+		capabilities = require('cmp_nvim_lsp').default_capabilities(),
 	})
 end
 
