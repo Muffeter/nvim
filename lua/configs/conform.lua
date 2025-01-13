@@ -5,6 +5,7 @@ local options = {
     html = { "prettier" },
     vue = { "prettier" },
     js = { "prettier" },
+    nix = { "nixpkgs_fmt" }, 
 
   },
 
