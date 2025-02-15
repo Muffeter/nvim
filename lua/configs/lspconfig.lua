@@ -4,7 +4,7 @@ local on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities
 
 local lspconfig = require("lspconfig")
-local servers = { "lua_ls", "rust_analyzer", "ts_ls", "nixd" }
+local servers = { "lua_ls", "rust_analyzer", "ts_ls", "unocss" }
 
 local my_on_attach = function(_, bufnr)
 	on_attach(_, bufnr)

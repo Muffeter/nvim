@@ -10,6 +10,7 @@ map('i', '<C-o>', 'copilot#Accept("\\<CR>")', {
   expr = true,
   replace_keycodes = false
 })
+map("i", '<C-w>', '<Plug>(copilot-suggest)')
 
 map("t", "<c-space>", "<C-\\><C-n>")
 print("hi")

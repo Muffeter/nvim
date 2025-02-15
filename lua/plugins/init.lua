@@ -27,9 +27,11 @@ return {
 		},
 	},
 	{
-		"Muffeter/pluto.nvim",
-		lazy = false,
-		opts = {},
+		"numToStr/Comment.nvim",
+    event = "BufRead",
+    config = function()
+      require("configs.comment")
+    end,
 	},
 	{
 		"puremourning/vimspector",
