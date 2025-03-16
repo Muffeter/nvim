@@ -6,7 +6,14 @@ return {
 			require("configs.conform")
 		end,
 	},
-
+	{
+		"HiPhish/rainbow-delimiters.nvim",
+		lazy = false,
+		opts = {},
+    config = function()
+      require("configs.rainbow-delimiters")
+    end,
+	},
 	-- These are some examples, uncomment them if you want to see them work!
 	{
 		"neovim/nvim-lspconfig",
@@ -28,10 +35,10 @@ return {
 	},
 	{
 		"numToStr/Comment.nvim",
-    event = "BufRead",
-    config = function()
-      require("configs.comment")
-    end,
+		event = "BufRead",
+		config = function()
+			require("configs.comment")
+		end,
 	},
 	{
 		"puremourning/vimspector",
@@ -61,16 +68,16 @@ return {
 			},
 		},
 	},
-  {
-    "hrsh7th/nvim-cmp",
-    config = function()
-      require("configs.nvim-cmp")
-    end,
-  },
-  {
-    "L3MON4D3/LuaSnip"
-  },
-  {
-    "saadparwaiz1/cmp_luasnip"
-  }
+	{
+		"hrsh7th/nvim-cmp",
+		config = function()
+			require("configs.nvim-cmp")
+		end,
+	},
+	{
+		"L3MON4D3/LuaSnip",
+	},
+	{
+		"saadparwaiz1/cmp_luasnip",
+	},
 }

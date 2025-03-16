@@ -1,5 +1,4 @@
 vim.o.completeopt = "menuone,noselect,preview"
-print("nvim-cmp.lua")
 local cmp = require("cmp")
 local option = {
 	preselect = cmp.PreselectMode.None,
@@ -30,4 +29,10 @@ local option = {
 		{ name = "luasnip" },
 	},
 }
+-- local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+-- cmp.event:on(
+--   'confirm_done',
+--   cmp_autopairs.on_confirm_done()
+-- )
+
 require("cmp").setup(option)
