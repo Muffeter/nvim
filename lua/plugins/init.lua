@@ -10,9 +10,9 @@ return {
 		"HiPhish/rainbow-delimiters.nvim",
 		lazy = false,
 		opts = {},
-    config = function()
-      require("configs.rainbow-delimiters")
-    end,
+		config = function()
+			require("configs.rainbow-delimiters")
+		end,
 	},
 	-- These are some examples, uncomment them if you want to see them work!
 	{
@@ -79,5 +79,35 @@ return {
 	},
 	{
 		"saadparwaiz1/cmp_luasnip",
+	},
+	{
+		"shellRaining/hlchunk.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			require("configs.hlchunk")
+		end,
+	},
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		enable = false,
+	},
+	{
+		"folke/snacks.nvim",
+		priority = 1000,
+		event = { "BufReadPre", "BufNewFile" },
+		---@type snacks.Config
+		opts = {
+			animate = { enabled = true },
+			bigfile = { enabled = true },
+			indent = { enabled = false },
+			input = { enabled = true },
+			notifier = { enabled = true },
+			quickfile = { enabled = true },
+			scope = { enabled = true },
+			scroll = { enabled = true },
+			statuscolumn = { enabled = true },
+			words = { enabled = true },
+		},
 	},
 }
