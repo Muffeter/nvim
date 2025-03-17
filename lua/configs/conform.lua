@@ -1,11 +1,12 @@
 local options = {
   formatters_by_ft = {
     lua = { "stylua" },
-    css = { "prettier" },
-    html = { "prettier" },
-    vue = { "prettier" },
-    js = { "prettier" },
-    nix = { "nixpkgs_fmt" }, 
+    css = { "prettierd" },
+    html = { "prettierd" },
+    vue = { "prettierd" },
+    js = { "prettierd" },
+    nix = { "nixpkgs_fmt" },
+    tsx = { "prettierd" },
 
   },
 
