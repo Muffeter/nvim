@@ -70,16 +70,17 @@ return {
 	},
 	{
 		"hrsh7th/nvim-cmp",
-		config = function()
-			require("configs.nvim-cmp")
-		end,
+    enabled = false
+		-- config = function()
+			-- require("configs.nvim-cmp")
+		-- end,
 	},
-	{
-		"L3MON4D3/LuaSnip",
-	},
-	{
-		"saadparwaiz1/cmp_luasnip",
-	},
+	-- {
+	-- 	"L3MON4D3/LuaSnip",
+	-- },
+	-- {
+	-- 	"saadparwaiz1/cmp_luasnip",
+	-- },
 	{
 		"shellRaining/hlchunk.nvim",
 		event = { "BufReadPre", "BufNewFile" },
@@ -110,4 +111,10 @@ return {
 			words = { enabled = true },
 		},
 	},
+  {
+    "neoclide/coc.nvim",
+    branch = "master",
+    build = "npm ci",
+    lazy = false
+  }
 }
