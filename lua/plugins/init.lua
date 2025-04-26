@@ -18,7 +18,6 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
-			require("nvchad.configs.lspconfig").defaults()
 			require("configs.lspconfig")
 		end,
 	},
@@ -41,18 +40,6 @@ return {
 		end,
 	},
 	{
-		"puremourning/vimspector",
-		keys = {
-			{ "<leader>t5", "<Plug>VimspectorContinue", desc = "continue" },
-			{ "<leader>t3", "<Plug>VimspectorStop", desc = "stop" },
-			{ "<leader>t2", "<Plug>VimspectorToggleBreakpoint", desc = "toggle breakpoint" },
-			{ "<leader>t4", "<Plug>VimspectorRestart", desc = "restart" },
-		},
-		config = function()
-			vim.g.vimspector_enable_mappings = "HUMAN"
-		end,
-	},
-	{
 		"github/copilot.vim",
 		lazy = false,
 	},
@@ -71,16 +58,7 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
     enabled = false
-		-- config = function()
-			-- require("configs.nvim-cmp")
-		-- end,
 	},
-	-- {
-	-- 	"L3MON4D3/LuaSnip",
-	-- },
-	-- {
-	-- 	"saadparwaiz1/cmp_luasnip",
-	-- },
 	{
 		"shellRaining/hlchunk.nvim",
 		event = { "BufReadPre", "BufNewFile" },
@@ -115,6 +93,12 @@ return {
     "neoclide/coc.nvim",
     branch = "master",
     build = "npm ci",
-    lazy = false
+    lazy = false,
+    config = function()
+      require("configs.coc")
+  end
+  },
+  {
+	  'projekt0n/github-nvim-theme', name = 'github-theme'
   }
 }
