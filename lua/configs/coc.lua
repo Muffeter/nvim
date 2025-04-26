@@ -3,6 +3,9 @@ local o = vim.opt
 o.updatetime = 300
 o.signcolumn = "yes"
 
+vim.g.coc_global_extensions = {'coc-json', 'coc-git', 'coc-snippets', 'coc-highlight'}
+
+
 local keyset = vim.keymap.set
 -- Autocomplete
 function _G.check_back_space()
