@@ -11,8 +11,8 @@ map('i', '<C-o>', 'copilot#Accept("\\<CR>")', {
 map("i", '<C-w>', '<Plug>(copilot-suggest)')
 
 map("t", "<c-space>", "<C-\\><C-n>")
-map("i", "<C-j>", "<Down>")
-map("i", "<C-k>", "<Up>")
+-- map("i", "<C-j>", "<Down>")
+-- map("i", "<C-k>", "<Up>")
 vim.g.copilot_no_tab_map = true
 
 

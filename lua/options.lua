@@ -1,20 +1,54 @@
-require "nvchad.options"
 
--- add yours here!
+------------------------------------------------------------options-----------------------------------------------------
+local opt = vim.opt
+local o = vim.o
+local g = vim.g
 
--- local o = vim.o
--- o.cursorlineopt ='both' -- to enable cursorline!
-local enable_providers = {
-  "python3_provider",
-  "node_provider",
-  -- and so on
-}
+o.laststatus = 3
+o.showmode = false
 
-for _, plugin in pairs(enable_providers) do
-  vim.g["loaded_" .. plugin] = nil
-  vim.cmd("runtime " .. plugin)
-end
+o.clipboard = "unnamedplus"
+o.cursorline = true
+o.cursorlineopt = "number"
 
-vim.g.vimspector_base_dir='C:/Users/ming/AppData/Local/nvim-data/lazy/vimspector'
-vim.g.shell = '/bin/bash'
-require 'nvim-treesitter.install'.compilers = { "gcc" }
+-- Indenting
+o.expandtab = true
+o.shiftwidth = 2
+o.smartindent = true
+o.tabstop = 2
+o.softtabstop = 2
+
+opt.fillchars = { eob = " " }
+o.ignorecase = true
+o.smartcase = true
+o.mouse = "a"
+
+-- Numbers
+o.number = true
+o.numberwidth = 2
+o.ruler = false
+
+-- disable nvim intro
+opt.shortmess:append "sI"
+
+o.signcolumn = "yes"
+o.splitbelow = true
+o.splitright = true
+o.timeoutlen = 400
+o.undofile = true
+
+-- interval for writing swap file to disk, also used by gitsigns
+o.updatetime = 250
+
+-- go to previous/next line with h,l,left arrow and right arrow
+-- when cursor reaches end/beginning of line
+opt.whichwrap:append "<>[]hl"
+
+-- disable some default providers
+g.loaded_node_provider = 0
+g.loaded_python3_provider = 0
+g.loaded_perl_provider = 0
+g.loaded_ruby_provider = 0
+
+--------------------------------------------themes------------------------------------------
+vim.cmd('colorscheme github_dark')
