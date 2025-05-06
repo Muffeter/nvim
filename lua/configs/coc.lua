@@ -3,7 +3,7 @@ local o = vim.opt
 o.updatetime = 300
 o.signcolumn = "yes"
 
-vim.g.coc_global_extensions = {'coc-json', 'coc-git', 'coc-snippets', 'coc-highlight'}
+vim.g.coc_global_extensions = {'coc-json', 'coc-git', 'coc-snippets'}
 vim.g.coc_default_semantic_highlight_groups = 1
 
 

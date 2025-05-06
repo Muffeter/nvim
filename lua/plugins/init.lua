@@ -104,5 +104,29 @@ return {
   {
     'nvim-telescope/telescope.nvim', tag = '0.1.8',
       dependencies = { 'nvim-lua/plenary.nvim' }
-  }
+  },
+  {
+  "hedyhli/outline.nvim",
+  lazy = true,
+  cmd = { "Outline", "OutlineOpen" },
+  config = function()
+      require('outline').setup({
+        providers = {
+          priority = {'coc'},
+        },
+      })
+  end,
+},
+-- Using Lazy
+{
+  "navarasu/onedark.nvim",
+  priority = 1000, -- make sure to load this before all the other start plugins
+  config = function()
+    require('onedark').setup {
+      style = 'warm'
+    }
+    -- Enable theme
+    require('onedark').load()
+  end
+}
 }
