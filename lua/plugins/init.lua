@@ -141,5 +141,8 @@ return {
     opts = {
         -- configuration goes here
     },
+},
+{
+  "honza/vim-snippets"
 }
 }
