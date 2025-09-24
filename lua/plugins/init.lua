@@ -144,5 +144,27 @@ return {
 },
 {
   "honza/vim-snippets"
+},
+{
+  "j-morano/buffer_manager.nvim",
+  dependencies = {
+    "nvim-lua/plenary.nvim"
+  },
+		config = function()
+			local buf = require("buffer_manager.ui")
+      local map = vim.keymap.set
+      map({'t', 'n'}, "<M-b>", buf.toggle_quick_menu, {noremap = true})
+		end,
+},
+{
+  "stevearc/overseer.nvim",
+  opts = {},
+},
+{
+  "rcarriga/nvim-notify",
+  config = function()
+    vim.notify = require('notify')
+    vim.notify("The Notifier init", "info")
+  end
 }
 }
