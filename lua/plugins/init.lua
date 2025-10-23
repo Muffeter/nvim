@@ -53,11 +53,10 @@ return {
 				"html",
 				"css",
 			},
-		},
+		}
 	},
 	{
-		"hrsh7th/nvim-cmp",
-    enabled = false
+				require("configs.blink-cmp")
 	},
 	{
 		"shellRaining/hlchunk.nvim",
@@ -90,15 +89,6 @@ return {
 		},
 	},
   {
-    "neoclide/coc.nvim",
-    branch = "master",
-    build = "npm ci",
-    lazy = false,
-    config = function()
-      require("configs.coc")
-  end
-  },
-  {
 	  'projekt0n/github-nvim-theme', name = 'github-theme'
   },
   {
@@ -123,7 +113,13 @@ return {
   priority = 1000, -- make sure to load this before all the other start plugins
   config = function()
     require('onedark').setup {
-      style = 'warm'
+      style = 'darker',
+			highlights = {
+				["@variable"] = { fg = "#91AADF" },
+				["@function"] = { fg = "#ffb86c" },
+				["@function.method"] = { fg = "#ffb86c" },
+				["@keyword.function"] = { fg = "#CF73E6" },
+			}
     }
     -- Enable theme
     require('onedark').load()
@@ -166,5 +162,11 @@ return {
     vim.notify = require('notify')
     vim.notify("The Notifier init", "info")
   end
+},
+{
+  "sheerun/vim-polyglot"
+},
+{
+	"voldikss/vim-floaterm"
 }
 }
