@@ -3,6 +3,10 @@ local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("n", "<Leader-/>", "gcc")
+map("n", "<C-o>", "m`o<ESC>``")
+
+
+
 map("i", "jk", "<ESC>")
 map('i', '<C-o>', 'copilot#Accept("\\<CR>")', {
   expr = true,
