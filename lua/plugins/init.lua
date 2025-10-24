@@ -56,7 +56,7 @@ return {
 		}
 	},
 	{
-				require("configs.blink-cmp")
+		require("configs.blink-cmp")
 	},
 	{
 		"shellRaining/hlchunk.nvim",
@@ -88,85 +88,92 @@ return {
 			words = { enabled = true },
 		},
 	},
-  {
-	  'projekt0n/github-nvim-theme', name = 'github-theme'
-  },
-  {
-    'nvim-telescope/telescope.nvim', tag = '0.1.8',
-      dependencies = { 'nvim-lua/plenary.nvim' }
-  },
-  {
-  "hedyhli/outline.nvim",
-  lazy = true,
-  cmd = { "Outline", "OutlineOpen" },
-  config = function()
-      require('outline').setup({
-        providers = {
-          priority = {'coc'},
-        },
-      })
-  end,
-},
--- Using Lazy
-{
-  "navarasu/onedark.nvim",
-  priority = 1000, -- make sure to load this before all the other start plugins
-  config = function()
-    require('onedark').setup {
-      style = 'darker',
-			highlights = {
-				["@variable"] = { fg = "#91AADF" },
-				["@function"] = { fg = "#ffb86c" },
-				["@function.method"] = { fg = "#ffb86c" },
-				["@keyword.function"] = { fg = "#CF73E6" },
+	{
+		'projekt0n/github-nvim-theme', name = 'github-theme'
+	},
+	{
+		'nvim-telescope/telescope.nvim',
+		tag = '0.1.8',
+		dependencies = { 'nvim-lua/plenary.nvim' }
+	},
+	{
+		"hedyhli/outline.nvim",
+		lazy = true,
+		cmd = { "Outline", "OutlineOpen" },
+		config = function()
+			require('outline').setup({
+				providers = {
+					priority = { 'coc' },
+				},
+			})
+		end,
+	},
+	-- Using Lazy
+	{
+		"navarasu/onedark.nvim",
+		priority = 1000, -- make sure to load this before all the other start plugins
+		config = function()
+			require('onedark').setup {
+				style = 'darker',
+				highlights = {
+					["@variable"] = { fg = "#91AADF" },
+					["@function"] = { fg = "#ffb86c" },
+					["@function.method"] = { fg = "#ffb86c" },
+					["@keyword.function"] = { fg = "#CF73E6" },
+				}
 			}
-    }
-    -- Enable theme
-    require('onedark').load()
-  end
-},
-{
-    "kawre/leetcode.nvim",
-    build = ":TSUpdate html", -- if you have `nvim-treesitter` installed
-    dependencies = {
-        "nvim-telescope/telescope.nvim",
-        -- "ibhagwan/fzf-lua",
-        "nvim-lua/plenary.nvim",
-        "MunifTanjim/nui.nvim",
-    },
-    opts = {
-        -- configuration goes here
-    },
-},
-{
-  "honza/vim-snippets"
-},
-{
-  "j-morano/buffer_manager.nvim",
-  dependencies = {
-    "nvim-lua/plenary.nvim"
-  },
+			-- Enable theme
+			require('onedark').load()
+		end
+	},
+	{
+		"kawre/leetcode.nvim",
+		build = ":TSUpdate html", -- if you have `nvim-treesitter` installed
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+			-- "ibhagwan/fzf-lua",
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+		},
+		opts = {
+			-- configuration goes here
+		},
+	},
+	{
+		"honza/vim-snippets"
+	},
+	{
+		"j-morano/buffer_manager.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim"
+		},
 		config = function()
 			local buf = require("buffer_manager.ui")
-      local map = vim.keymap.set
-      map({'t', 'n'}, "<M-b>", buf.toggle_quick_menu, {noremap = true})
+			local map = vim.keymap.set
+			map({ 't', 'n' }, "<M-b>", buf.toggle_quick_menu, { noremap = true })
 		end,
-},
-{
-  "stevearc/overseer.nvim",
-  opts = {},
-},
-{
-  "rcarriga/nvim-notify",
-  config = function()
-    vim.notify = require('notify')
-    vim.notify("The Notifier init", "info")
-  end
-},
-{
-  "sheerun/vim-polyglot"
-},
-{
-	"voldikss/vim-floaterm"
-}
+	},
+	{
+		"stevearc/overseer.nvim",
+		opts = {},
+	},
+	{
+		"rcarriga/nvim-notify",
+		config = function()
+			vim.notify = require('notify')
+			vim.notify("The Notifier init", "info")
+		end
+	},
+	{
+		"sheerun/vim-polyglot"
+	},
+	{
+		"voldikss/vim-floaterm"
+	},
+	{
+		"nvim-tree/nvim-tree.lua",
+		config = function()
+			require("nvim-tree").setup()
+		end
+	}
 }

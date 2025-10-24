@@ -8,8 +8,25 @@ local capabilities = {
 }
 
 capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
-
-vim.lsp.config("pyright", {
+local lsp_servers = {
+  {
+    server = "pyright",
+    opt = {},
+  },
+  {
+    server = "lua_ls",
+    opt = {
+      filetypes = "lua",
+    }
+  },
+  {
+    server = "ts_ls"
+  }
+}
+for i, v in ipairs(lsp_servers) do
+  vim.lsp.config(v.server, {
     capabilities = capabilities,
-    })
-vim.lsp.enable("pyright")
+  })
+
+  vim.lsp.enable(v.server)
+end

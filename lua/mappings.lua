@@ -4,6 +4,8 @@ local map = vim.keymap.set
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("n", "<Leader-/>", "gcc")
 map("n", "<C-o>", "m`o<ESC>``")
+-- For nvim-tree
+map("n", "<C-\\>", ":NvimTreeToggle<CR>")
 
 
 
