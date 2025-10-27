@@ -1,11 +1,25 @@
 local map = vim.keymap.set
+vim.g.mapleader = "<Space>"
 
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
-map("n", "<Leader-/>", "gcc")
 map("n", "<C-o>", "m`o<ESC>``")
+
+-- move 
+map("n", "<C-h>", "^", { desc = "Move cursor beginning non char" })
+map("n", "<C-l>", "$", { desc = "Move cursor end" } )
+map("i", "<C-h>", "<Left>", { desc = "Move cursor Left" } )
+map("i", "<C-l>", "<Right>", { desc = "Move cursor Right" } )
+map("i", "<C-j>", "<Down>", { desc = "Move cursor Down" } )
+map("i", "<C-k>", "<Up>", { desc = "Move cursor Up" } )
+
 -- For nvim-tree
 map("n", "<C-\\>", ":NvimTreeToggle<CR>")
+
+-- lspconfig
+map("n", "<C-k>", vim.lsp.buf.hover)
+map("n", "<A-S-f>", vim.lsp.buf.format)
+
 
 
 

@@ -52,3 +52,4 @@ g.loaded_ruby_provider = 0
 
 --------------------------------------------themes------------------------------------------
 -- vim.cmd('colorscheme github_dark')
+vim.cmd("TSEnable highlight")
