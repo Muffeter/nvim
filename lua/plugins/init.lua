@@ -1,5 +1,6 @@
 return {
 	{
+		-- For format code
 		"stevearc/conform.nvim",
 		-- event = 'BufWritePre', -- uncomment for format on save
 		config = function()
@@ -7,16 +8,18 @@ return {
 		end,
 	},
 	{
+		-- Code block shower
 		"HiPhish/rainbow-delimiters.nvim",
-		lazy = false,
+		event = "BufRead",
 		opts = {},
 		config = function()
 			require("configs.rainbow-delimiters")
 		end,
 	},
-	-- These are some examples, uncomment them if you want to see them work!
 	{
+		-- lsp server support
 		"neovim/nvim-lspconfig",
+		event = "BufEnter",
 		config = function()
 			require("configs.lspconfig")
 		end,
@@ -24,6 +27,7 @@ return {
 
 	{
 		"williamboman/mason.nvim",
+		event = "BufEnter",
 		opts = {
 			ensure_installed = {
 				"lua-language-server",
@@ -41,7 +45,7 @@ return {
 	},
 	{
 		"github/copilot.vim",
-		lazy = false,
+		lazy = true,
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -56,7 +60,8 @@ return {
 		}
 	},
 	{
-		require("configs.blink-cmp")
+		-- Compeletion
+		require("configs.blink-cmp"),
 	},
 	{
 		"shellRaining/hlchunk.nvim",
@@ -87,9 +92,6 @@ return {
 			statuscolumn = { enabled = true },
 			words = { enabled = true },
 		},
-	},
-	{
-		'projekt0n/github-nvim-theme', name = 'github-theme'
 	},
 	{
 		'nvim-telescope/telescope.nvim',
@@ -133,6 +135,7 @@ return {
 	{
 		"kawre/leetcode.nvim",
 		build = ":TSUpdate html", -- if you have `nvim-treesitter` installed
+		event = "CmdlineEnter",
 		dependencies = {
 			"nvim-telescope/telescope.nvim",
 			-- "ibhagwan/fzf-lua",
@@ -144,10 +147,12 @@ return {
 		},
 	},
 	{
-		"honza/vim-snippets"
+		"honza/vim-snippets",
+		event = "BufRead"
 	},
 	{
 		"j-morano/buffer_manager.nvim",
+		event = "BufNew",
 		dependencies = {
 			"nvim-lua/plenary.nvim"
 		},
@@ -174,7 +179,8 @@ return {
 		"sheerun/vim-polyglot"
 	},
 	{
-		"voldikss/vim-floaterm"
+		"voldikss/vim-floaterm",
+		event = "CmdlineEnter"
 	},
 	{
 		"nvim-tree/nvim-tree.lua",

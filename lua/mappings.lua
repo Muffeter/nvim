@@ -27,8 +27,13 @@ map("n", "<C-\\>", ":NvimTreeToggle<CR>", { desc = "Toggle the file explorer" })
 
 -- lspconfig
 map("n", "<C-k>", vim.lsp.buf.hover)
-map("n", "<A-S-f>", vim.lsp.buf.format)
-map("i", "<A-S-f>", vim.lsp.buf.format)
+-- map("n", "<A-S-f>", vim.lsp.buf.format)
+-- map("i", "<A-S-f>", vim.lsp.buf.format)
+
+-- conform
+local conform = require("conform")
+map("n", "<A-S-f>", conform.format)
+map("i", "<A-S-f>", conform.format)
 
 -- telescope
 local builtin = require("telescope.builtin")
