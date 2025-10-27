@@ -117,9 +117,13 @@ return {
 				style = 'darker',
 				highlights = {
 					["@variable"] = { fg = "#91AADF" },
-					["@function"] = { fg = "#ffb86c" },
-					["@function.method"] = { fg = "#ffb86c" },
+					["@function"] = { fg = "#FFA066" },
+					["@function.method"] = { fg = "#737c73" },
+					["@constructor"] = { fg = "#b98d7b" },
 					["@keyword.function"] = { fg = "#CF73E6" },
+					["@type.cpp"] = { fg = "#68AD99" },
+					["@variable.parameter"] = { fg = "#b8b4d0" },
+					["@type.builtin"] = { fg = "#c7d7e0" }
 				}
 			}
 			-- Enable theme
