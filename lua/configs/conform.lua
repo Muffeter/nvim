@@ -4,10 +4,10 @@ local options = {
     css = { "prettierd" },
     html = { "prettierd" },
     vue = { "prettierd" },
-    js = { "prettierd" },
+    javascript = { "prettierd", "prettier", lsp_format = "fallback" },
     nix = { "nixpkgs_fmt" },
     tsx = { "prettierd" },
-
+    cpp = { "clang-format" }
   },
 
   -- format_on_save = {

@@ -22,11 +22,13 @@ map("n", "<C-o>", "m`o<ESC>``", { desc = "new a line without going into insert m
 map("v", "<Tab>", ">", { desc = "indent right" })
 map("v", "<S-Tab>", "<", { desc = "indent left" })
 
--- nvim-tree
-map("n", "<C-\\>", ":NvimTreeToggle<CR>", { desc = "Toggle the file explorer" })
+-- neo-tree
+map("n", "<C-\\>", ":Neotree toggle<CR>", { desc = "Toggle the file explorer" })
 
 -- lspconfig
-map("n", "<C-k>", vim.lsp.buf.hover)
+map("n", "<C-k>", vim.lsp.buf.hover, { desc = "Hover" } )
+map("n", "gd", vim.lsp.buf.definition, { desc = "Go lsp definition" } )
+map("n", "gi", vim.lsp.buf.implementation, { desc = "Go lsp implementation"} )
 -- map("n", "<A-S-f>", vim.lsp.buf.format)
 -- map("i", "<A-S-f>", vim.lsp.buf.format)
 

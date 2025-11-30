@@ -16,6 +16,8 @@ local plugins = require "plugins"
 
 
 require("lazy").setup(plugins)
+require("globals")
 require("mappings")
 require("options")
+require("ui")
 

@@ -1,3 +1,4 @@
+-- vim.lsp.set_log_level("off")
 local capabilities = {
   textDocument = {
     foldingRange = {
@@ -21,6 +22,13 @@ local lsp_servers = {
   },
   {
     server = "ts_ls"
+  },
+  {
+    server = "cmake",
+    opt = {
+      filetypes = "CMakeLists.txt"
+    }
+
   }
 }
 for i, v in ipairs(lsp_servers) do

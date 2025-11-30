@@ -57,7 +57,7 @@ return {
 				"html",
 				"css",
 			},
-		}
+		},
 	},
 	{
 		-- Compeletion
@@ -94,18 +94,18 @@ return {
 		},
 	},
 	{
-		'nvim-telescope/telescope.nvim',
-		tag = '0.1.8',
-		dependencies = { 'nvim-lua/plenary.nvim' }
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.8",
+		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 	{
 		"hedyhli/outline.nvim",
 		lazy = true,
 		cmd = { "Outline", "OutlineOpen" },
 		config = function()
-			require('outline').setup({
+			require("outline").setup({
 				providers = {
-					priority = { 'coc' },
+					priority = { "lsp" },
 				},
 			})
 		end,
@@ -115,8 +115,8 @@ return {
 		"navarasu/onedark.nvim",
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
-			require('onedark').setup {
-				style = 'darker',
+			require("onedark").setup({
+				style = "darker",
 				highlights = {
 					["@variable"] = { fg = "#91AADF" },
 					["@function"] = { fg = "#FFA066" },
@@ -125,12 +125,12 @@ return {
 					["@keyword.function"] = { fg = "#CF73E6" },
 					["@type.cpp"] = { fg = "#68AD99" },
 					["@variable.parameter"] = { fg = "#b8b4d0" },
-					["@type.builtin"] = { fg = "#c7d7e0" }
-				}
-			}
+					["@type.builtin"] = { fg = "#c7d7e0" },
+				},
+			})
 			-- Enable theme
-			require('onedark').load()
-		end
+			require("onedark").load()
+		end,
 	},
 	{
 		"kawre/leetcode.nvim",
@@ -148,18 +148,18 @@ return {
 	},
 	{
 		"honza/vim-snippets",
-		event = "BufRead"
+		event = "BufRead",
 	},
 	{
 		"j-morano/buffer_manager.nvim",
 		event = "BufNew",
 		dependencies = {
-			"nvim-lua/plenary.nvim"
+			"nvim-lua/plenary.nvim",
 		},
 		config = function()
 			local buf = require("buffer_manager.ui")
 			local map = vim.keymap.set
-			map({ 't', 'n' }, "<M-b>", buf.toggle_quick_menu, { noremap = true })
+			map({ "t", "n" }, "<M-z>", buf.toggle_quick_menu, { noremap = true })
 		end,
 	},
 	{
@@ -169,26 +169,37 @@ return {
 	{
 		"rcarriga/nvim-notify",
 		config = function()
-			vim.notify = require('notify').setup({
+			vim.notify = require("notify").setup({
 				max_width = 200,
-				max_height = 200
+				max_height = 200,
 			})
-		end
+		end,
 	},
 	{
-		"sheerun/vim-polyglot"
+		"sheerun/vim-polyglot",
 	},
 	{
 		"voldikss/vim-floaterm",
-		event = "CmdlineEnter"
+		event = "CmdlineEnter",
 	},
 	{
-		"nvim-tree/nvim-tree.lua",
-		config = function()
-			require("nvim-tree").setup()
-		end
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v3.x",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+			"nvim-tree/nvim-web-devicons", -- optional, but recommended
+		},
+		lazy = false, -- neo-tree will lazily load itself
+		opts = {
+			window = {
+				width = 30
+
+			}
+		}
 	},
 	{
+		-- code diagnostics panel
 		"folke/trouble.nvim",
 		opts = {}, -- for default options, refer to the configuration section for custom setup.
 		cmd = "Trouble",
@@ -225,4 +236,53 @@ return {
 			},
 		},
 	},
+	{
+		-- mason automatic setup
+		"mason-org/mason-lspconfig.nvim",
+		opts = {},
+		dependencies = {
+			{ "mason-org/mason.nvim", opts = {} },
+			"neovim/nvim-lspconfig",
+		},
+	},
+	-- {
+	-- 	dir = "D:/work/danm.nvim/",
+	-- 	opts = {},
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 	},
+	-- },
+	{
+		-- For git highlight
+		"lewis6991/gitsigns.nvim"
+	},
+	{
+  "folke/which-key.nvim",
+  event = "VeryLazy",
+  opts = {
+		win = {
+			height = { min = 4, max = 15}
+
+		}
+  },
+  keys = {
+    {
+      "<leader>?",
+      function()
+        require("which-key").show({ global = false })
+      end,
+      desc = "Buffer Local Keymaps (which-key)",
+    },
+  },
+},
+{ 'nvim-mini/mini.nvim', version = '*' },
+{
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "VeryLazy",
+    priority = 1000,
+    config = function()
+        require("tiny-inline-diagnostic").setup()
+        vim.diagnostic.config({ virtual_text = false }) -- Disable Neovim's default virtual text diagnostics
+    end,
+}
 }
