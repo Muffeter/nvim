@@ -44,3 +44,6 @@ map("n", "<C-f>", builtin.live_grep, { desc = "find text across project" })
 map("i", "jk", "<ESC>")
 map("t", "<c-space>", "<C-\\><C-n>")
 vim.g.copilot_no_tab_map = true
+
+-- chore
+map("n", "<ESC><ESC>", ":noh<CR>", { desc = "Remove find mark" })
