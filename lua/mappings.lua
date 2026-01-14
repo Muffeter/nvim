@@ -40,7 +40,10 @@ map("i", "<A-S-f>", conform.format)
 -- telescope
 local builtin = require("telescope.builtin")
 map("n", "<C-f>", builtin.live_grep, { desc = "find text across project" })
-map("n", "<C-s>", builtin.git_files, { desc = "find text across project" })
+map("n", "<C-s>",
+  function ()
+    builtin.git_files{path_display = { "truncate" }}
+  end, { desc = "find text across project" })
 
 map("i", "jk", "<ESC>")
 map("t", "<c-space>", "<C-\\><C-n>")
