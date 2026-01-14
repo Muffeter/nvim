@@ -20,4 +20,5 @@ require("globals")
 require("mappings")
 require("options")
 require("ui")
+require("neovide")
 
