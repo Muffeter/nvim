@@ -21,4 +21,6 @@ require("mappings")
 require("options")
 require("ui")
 require("neovide")
+require("command")
 
+-- ref https://neovim.io/doc/user/lua-guide.html
