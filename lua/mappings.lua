@@ -39,7 +39,7 @@ map("i", "<A-S-f>", conform.format)
 
 -- telescope
 local builtin = require("telescope.builtin")
-map("n", "<C-f>", builtin.live_grep, { desc = "find text across project" })
+map("n", "<C-f>", builtin.current_buffer_fuzzy_find, { desc = "find text in current buffer" })
 map("n", "<C-s>",
   function ()
     builtin.git_files{path_display = { "truncate" }}
@@ -50,4 +50,8 @@ map("t", "<c-space>", "<C-\\><C-n>")
 vim.g.copilot_no_tab_map = true
 
 -- chore
-map("n", "<ESC><ESC>", ":noh<CR>", { desc = "Remove find mark" })
+map("n", "<ESC><ESC>", function ()
+  -- remove find mark
+  vim.cmd("noh")
+  
+end, { desc = "Remove find mark" })
