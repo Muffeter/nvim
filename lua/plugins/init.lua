@@ -193,9 +193,19 @@ return {
 		lazy = false, -- neo-tree will lazily load itself
 		opts = {
 			window = {
-				width = 30
+				width = 40
+			},
+			indent = {
+				indent_size = 1
+			},
+			filesystem = {
+				filtered_items = {
+					hide_by_pattern = {
 
-			}
+						"*.meta"
+					}
+				}
+			},
 		}
 	},
 	{
@@ -284,5 +294,41 @@ return {
         require("tiny-inline-diagnostic").setup()
         vim.diagnostic.config({ virtual_text = false }) -- Disable Neovim's default virtual text diagnostics
     end,
-}
+},
+  {
+    "folke/lazydev.nvim",
+    ft = "lua", -- only load on lua files
+    opts = {
+      library = {
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
+    },
+  },
+{'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
+{
+  "coffebar/neovim-project",
+  opts = {
+    projects = { -- define project roots
+"D:/workSpace/FISHU3D/CatchFishU3D",
+"~/AppData/Local/nvim/"
+    },
+    picker = {
+      type = "telescope", -- one of "telescope", "fzf-lua", or "snacks"
+    }
+  },
+  init = function()
+    -- enable saving the state of plugins in the session
+    vim.opt.sessionoptions:append("globals") -- save global variables that start with an uppercase letter and contain at least one lowercase letter.
+  end,
+  dependencies = {
+    { "nvim-lua/plenary.nvim" },
+    -- optional picker
+    { "nvim-telescope/telescope.nvim", tag = "0.1.4" },
+    { "Shatur/neovim-session-manager" },
+  },
+  lazy = false,
+  priority = 100,
+},
 }

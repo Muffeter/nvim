@@ -15,7 +15,7 @@ local lsp_servers = {
     opt = {},
   },
   {
-    server = "lua_ls",
+    server = "emmylua_ls",
     opt = {
       filetypes = "lua",
     }
