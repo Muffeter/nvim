@@ -1,4 +1,4 @@
--- vim.lsp.set_log_level("off")
+-- vim.lsp.set_log_level("info")
 local capabilities = {
   textDocument = {
     foldingRange = {
@@ -9,16 +9,16 @@ local capabilities = {
 }
 
 capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
+vim.lsp.config("*", {
+    capabilities = capabilities,
+  })
 local lsp_servers = {
+  -- {
+  --   server = "lua_ls"
+  -- },
   {
     server = "pyright",
     opt = {},
-  },
-  {
-    server = "emmylua_ls",
-    opt = {
-      filetypes = "lua",
-    }
   },
   {
     server = "ts_ls"
@@ -28,13 +28,10 @@ local lsp_servers = {
     opt = {
       filetypes = "CMakeLists.txt"
     }
-
   }
 }
 for i, v in ipairs(lsp_servers) do
-  vim.lsp.config(v.server, {
-    capabilities = capabilities,
-  })
-
   vim.lsp.enable(v.server)
 end
+
+require("configs.lsp.lua_helper")

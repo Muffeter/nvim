@@ -30,7 +30,6 @@ return {
 		event = "BufEnter",
 		opts = {
 			ensure_installed = {
-				"lua-language-server",
 				"stylua",
 				"python-lsp-server",
 			},
@@ -180,10 +179,7 @@ return {
 	{
 		"rcarriga/nvim-notify",
 		config = function()
-			vim.notify = require("notify").setup({
-				max_width = 200,
-				max_height = 200,
-			})
+			vim.notify = require("notify")		
 		end,
 	},
 	{
@@ -257,15 +253,15 @@ return {
 			},
 		},
 	},
-	{
-		-- mason automatic setup
-		"mason-org/mason-lspconfig.nvim",
-		opts = {},
-		dependencies = {
-			{ "mason-org/mason.nvim", opts = {} },
-			"neovim/nvim-lspconfig",
-		},
-	},
+	-- {
+	-- 	-- mason automatic setup
+	-- 	"mason-org/mason-lspconfig.nvim",
+	-- 	opts = {},
+	-- 	dependencies = {
+	-- 		{ "mason-org/mason.nvim", opts = {} },
+	-- 		"neovim/nvim-lspconfig",
+	-- 	}
+	-- },
 	-- {
 	-- 	dir = "D:/work/danm.nvim/",
 	-- 	opts = {},
@@ -342,4 +338,11 @@ return {
   lazy = false,
   priority = 100,
 },
+{
+  "j-hui/fidget.nvim",
+  opts = {
+    -- options
+  },
+}
+
 }
