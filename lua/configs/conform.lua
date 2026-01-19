@@ -1,20 +1,18 @@
 local options = {
-  formatters_by_ft = {
-    lua = { "stylua" },
-    css = { "prettierd" },
-    html = { "prettierd" },
-    vue = { "prettierd" },
-    javascript = { "prettierd", "prettier", lsp_format = "fallback" },
-    nix = { "nixpkgs_fmt" },
-    tsx = { "prettierd" },
-    cpp = { "clang-format" }
-  },
-
-  -- format_on_save = {
-  --   -- These options will be passed to conform.format()
-  --   timeout_ms = 500,
-  --   lsp_fallback = true,
-  -- },
+	formatters_by_ft = {
+		lua = { "stylua", lsp_format = "fallback" },
+		css = { "prettierd" },
+		html = { "prettierd" },
+		vue = { "prettierd" },
+		javascript = { "prettierd", "prettier", lsp_format = "fallback" },
+		nix = { "nixpkgs_fmt" },
+		tsx = { "prettierd" },
+		cpp = { "clang-format" },
+		["*"] = { "codespell" },
+	},
+	default_format_opts = {
+		lsp_format = "fallback",
+	},
 }
 
 require("conform").setup(options)
