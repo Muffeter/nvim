@@ -8,6 +8,7 @@ local options = {
 		nix = { "nixpkgs_fmt" },
 		tsx = { "prettierd" },
 		cpp = { "clang-format" },
+    		c_sharp = {"clang-format"}
 		["*"] = { "codespell" },
 	},
 	default_format_opts = {

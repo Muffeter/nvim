@@ -344,4 +344,7 @@ return {
 			-- options
 		},
 	},
+{
+	"seblyng/roslyn.nvim",
+}
 }

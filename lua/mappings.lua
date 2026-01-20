@@ -34,7 +34,9 @@ map("n", "gi", vim.lsp.buf.implementation, { desc = "Go lsp implementation"} )
 
 -- conform
 local conform = require("conform")
-map("n", "<A-S-f>", conform.format)
+map("n", "<A-S-f>", function()
+  conform.format({lsp_format = "fallback"}, function(err, did_edit) print("Format") end)
+end)
 map("i", "<A-S-f>", conform.format)
 
 -- telescope
