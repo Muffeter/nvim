@@ -22,6 +22,12 @@ map("n", "<C-o>", "m`o<ESC>``", { desc = "new a line without going into insert m
 map("v", "<Tab>", ">", { desc = "indent right" })
 map("v", "<S-Tab>", "<", { desc = "indent left" })
 
+-- copy paste
+map("n", "<C-v>", '"*p', { desc = "paste" })
+map("c", "<C-v>", '"*p', { desc = "paste in command" })
+map("i", "<C-v>", '<Esc>"*pa', { desc = "paste in command" })
+map("n", "<S-Insert>", '"*p', { desc = "paste" })
+
 -- neo-tree
 map("n", "<C-\\>", ":Neotree toggle<CR>", { desc = "Toggle the file explorer" })
 
