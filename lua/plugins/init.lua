@@ -297,7 +297,13 @@ return {
 			},
 		},
 	},
-	{ "nvim-mini/mini.nvim", version = "*" },
+	{
+		"nvim-mini/mini.nvim",
+		version = "*",
+		config = function()
+			require("configs.mini")
+		end,
+	},
 	{
 		"rachartier/tiny-inline-diagnostic.nvim",
 		event = "VeryLazy",
