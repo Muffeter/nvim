@@ -2,7 +2,6 @@ local map = vim.keymap.set
 local unmap = vim.keymap.del
 vim.g.mapleader = "<Space>"
 
-
 map("n", ";", ":", { desc = "CMD enter command mode" })
 
 -- move
@@ -32,34 +31,29 @@ map("n", "<S-Insert>", '"*p', { desc = "paste" })
 map("n", "<C-\\>", ":Neotree toggle<CR>", { desc = "Toggle the file explorer" })
 
 -- lspconfig
-map("n", "<C-k>", vim.lsp.buf.hover, { desc = "Hover" } )
-map("n", "gd", vim.lsp.buf.definition, { desc = "Go lsp definition" } )
-map("n", "gi", vim.lsp.buf.implementation, { desc = "Go lsp implementation"} )
+map("n", "<C-k>", vim.lsp.buf.hover, { desc = "Hover" })
+map("n", "gd", vim.lsp.buf.definition, { desc = "Go lsp definition" })
+map("n", "gi", vim.lsp.buf.implementation, { desc = "Go lsp implementation" })
 -- map("n", "<A-S-f>", vim.lsp.buf.format)
 -- map("i", "<A-S-f>", vim.lsp.buf.format)
 
 -- conform
 local conform = require("conform")
-map("n", "<A-S-f>", function()
-  conform.format({lsp_format = "fallback"}, function(err, did_edit) print("Format") end)
-end)
-map("i", "<A-S-f>", conform.format)
+map("", "<A-S-f>", function() 	conform.format({ lsp_format = "fallback", async = true })end)
 
 -- telescope
 local builtin = require("telescope.builtin")
 map("n", "<C-f>", builtin.current_buffer_fuzzy_find, { desc = "find text in current buffer" })
-map("n", "<C-s>",
-  function ()
-    builtin.git_files{path_display = { "truncate" }}
-  end, { desc = "find text across project" })
+map("n", "<C-s>", function()
+	builtin.git_files({ path_display = { "truncate" } })
+end, { desc = "find text across project" })
 
 map("i", "jk", "<ESC>")
 map("t", "<c-space>", "<C-\\><C-n>")
 vim.g.copilot_no_tab_map = true
 
 -- chore
-map("n", "<ESC><ESC>", function ()
-  -- remove find mark
-  vim.cmd("noh")
-  
+map("n", "<ESC><ESC>", function()
+	-- remove find mark
+	vim.cmd("noh")
 end, { desc = "Remove find mark" })
