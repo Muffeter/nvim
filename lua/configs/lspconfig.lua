@@ -13,9 +13,9 @@ vim.lsp.config("*", {
     capabilities = capabilities,
   })
 local lsp_servers = {
-  -- {
-  --   server = "lua_ls"
-  -- },
+  {
+    server = "lua_ls"
+  },
   {
     server = "pyright",
     opt = {},
@@ -34,4 +34,5 @@ for i, v in ipairs(lsp_servers) do
   vim.lsp.enable(v.server)
 end
 
-require("configs.lsp.lua_helper")
+-- require("configs.lsp.lua_helper")
+require("configs.lsp.ominisharp")

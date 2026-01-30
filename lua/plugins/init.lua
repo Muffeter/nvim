@@ -48,6 +48,8 @@ return {
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
+		tag = "v0.10.0",
+		build = ":TSUpdate",
 		opts = {
 			ensure_installed = {
 				"vim",
@@ -167,6 +169,9 @@ return {
 			"nvim-lua/plenary.nvim",
 		},
 		config = function()
+			require("buffer_manager").setup({
+				short_file_names = true,
+			})
 			local buf = require("buffer_manager.ui")
 			local map = vim.keymap.set
 			map({ "t", "n" }, "<M-z>", buf.toggle_quick_menu, { noremap = true })
@@ -313,13 +318,21 @@ return {
 			},
 		},
 	},
-	{ "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons" },
+	{
+		"akinsho/bufferline.nvim",
+		version = "*",
+		dependencies = "nvim-tree/nvim-web-devicons",
+		config = function()
+			require("bufferline").setup({})
+		end,
+	},
 	{
 		"coffebar/neovim-project",
 		opts = {
 			projects = { -- define project roots
 				"D:/workSpace/FISHU3D/CatchFishU3D",
-				"~/AppData/Local/nvim/",
+				"~/AppData/Local/nvim",
+				"D:/workSpace/FISHU3D/CatchFishU3D/Fishing3D/Assets/Editor/unity_tool",
 			},
 			picker = {
 				type = "telescope", -- one of "telescope", "fzf-lua", or "snacks"
@@ -344,7 +357,7 @@ return {
 			-- options
 		},
 	},
-{
-	"seblyng/roslyn.nvim",
-}
+	{
+		"seblyng/roslyn.nvim",
+	},
 }

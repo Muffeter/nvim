@@ -11,7 +11,7 @@ end
 
 local lua_helper = {
       cmd = {lsp_exe_path, "-mode", "1"},
-      filetype = {"lua"},
+      filetypes = {"lua"},
       name = "lua_helper",
       root_markers = {".git"}
 }
