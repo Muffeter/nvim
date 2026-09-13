@@ -1,9 +1,11 @@
-vim.lsp.config("ominisharp", {
-	root_markers = {".git"},
+local omnisharp_dll = vim.fs.joinpath(vim.fn.stdpath("data"), "mason", "packages", "omnisharp", "libexec", "OmniSharp.dll")
+
+vim.lsp.config("omnisharp", {
+	root_markers = { ".git", "*.sln", "*.csproj" },
 	filetypes = { "cs" },
 	cmd = {
 		"dotnet",
-		vim.fn.stdpath("data") .. "\\mason\\packages\\omnisharp\\libexec\\OmniSharp.dll",
+		omnisharp_dll,
 	},
 	settings = {
 		FormattingOptions = {
@@ -15,4 +17,4 @@ vim.lsp.config("ominisharp", {
 		},
 	},
 })
-vim.lsp.enable("ominisharp")
+vim.lsp.enable("omnisharp")

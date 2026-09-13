@@ -12,14 +12,14 @@ map("i", "<C-l>", "<Right>", { desc = "Move cursor Right" })
 map("i", "<C-j>", "<Down>", { desc = "Move cursor Down" })
 map("i", "<C-k>", "<Up>", { desc = "Move cursor Up" })
 
--- modify
-map("n", "dw", '"1dw', { desc = "delete word without copy into latest register" })
-map("n", "dd", '"1dd', { desc = "delete line without copy into latest register" })
-map("n", "cc", '"1cc', { desc = "cut word without copy into latest register" })
-map("n", "cw", '"1cw', { desc = "cut line without copy into latest register" })
+-- modify (use black hole register to avoid polluting clipboard/numbered registers)
+map("n", "dw", '"_dw', { desc = "delete word without copying" })
+map("n", "dd", '"_dd', { desc = "delete line without copying" })
+map("n", "cc", '"_cc', { desc = "change line without copying" })
+map("n", "cw", '"_cw', { desc = "change word without copying" })
 map("n", "<C-o>", "m`o<ESC>``", { desc = "new a line without going into insert mode" })
-map("v", "<Tab>", ">", { desc = "indent right" })
-map("v", "<S-Tab>", "<", { desc = "indent left" })
+map("v", "<Tab>", ">gv", { desc = "indent right and reselect" })
+map("v", "<S-Tab>", "<gv", { desc = "indent left and reselect" })
 
 -- copy paste
 map("n", "<C-v>", '"*p', { desc = "paste" })
@@ -31,11 +31,14 @@ map("n", "<S-Insert>", '"*p', { desc = "paste" })
 map("n", "<C-\\>", ":Neotree toggle<CR>", { desc = "Toggle the file explorer" })
 
 -- lspconfig
-map("n", "<C-k>", vim.lsp.buf.hover, { desc = "Hover" })
-map("n", "gd", vim.lsp.buf.definition, { desc = "Go lsp definition" })
-map("n", "gi", vim.lsp.buf.implementation, { desc = "Go lsp implementation" })
--- map("n", "<A-S-f>", vim.lsp.buf.format)
--- map("i", "<A-S-f>", vim.lsp.buf.format)
+map("n", "<C-k>", vim.lsp.buf.hover, { desc = "LSP Hover" })
+map("n", "gd", vim.lsp.buf.definition, { desc = "LSP Definition" })
+map("n", "gi", vim.lsp.buf.implementation, { desc = "LSP Implementation" })
+map("n", "gr", vim.lsp.buf.references, { desc = "LSP References" })
+map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
+map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "LSP Rename" })
+map("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous Diagnostic" })
+map("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
 
 -- conform
 local conform = require("conform")

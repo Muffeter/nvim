@@ -48,7 +48,7 @@ return {
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
-		tag = "v0.10.0",
+		branch = "master",
 		build = ":TSUpdate",
 		opts = {
 			ensure_installed = {
@@ -159,10 +159,6 @@ return {
 		},
 	},
 	{
-		"honza/vim-snippets",
-		event = "BufRead",
-	},
-	{
 		"j-morano/buffer_manager.nvim",
 		event = "BufNew",
 		dependencies = {
@@ -180,16 +176,6 @@ return {
 	{
 		"stevearc/overseer.nvim",
 		opts = {},
-	},
-	{
-		"rcarriga/nvim-notify",
-		config = function()
-			vim.notify = require("notify")
-		end,
-		lazy = false,
-	},
-	{
-		"sheerun/vim-polyglot",
 	},
 	{
 		"voldikss/vim-floaterm",
@@ -351,7 +337,7 @@ return {
 		dependencies = {
 			{ "nvim-lua/plenary.nvim" },
 			-- optional picker
-			{ "nvim-telescope/telescope.nvim", tag = "0.1.4" },
+			{ "nvim-telescope/telescope.nvim" },
 			{ "Shatur/neovim-session-manager" },
 		},
 		lazy = false,
