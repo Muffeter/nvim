@@ -36,6 +36,27 @@ map("n", "[b", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev Buffer Tab" })
 map("n", "<A-.>", "<cmd>BufferLineMoveNext<cr>", { desc = "Move Buffer Tab Right" })
 map("n", "<A-,>", "<cmd>BufferLineMovePrev<cr>", { desc = "Move Buffer Tab Left" })
 
+local function tabline_scroll(direction)
+	local pos = vim.fn.getmousepos()
+	if pos.screenrow == 1 and pos.winrow == 0 then
+		if direction == "left" then
+			vim.cmd("BufferLineCyclePrev")
+		else
+			vim.cmd("BufferLineCycleNext")
+		end
+		return ""
+	end
+	return direction == "left" and "6zh" or "6zl"
+end
+
+map({ "n", "v", "i" }, "<ScrollWheelLeft>", function()
+	return tabline_scroll("left")
+end, { expr = true, desc = "Horizontal scroll left or tabline cycle prev" })
+
+map({ "n", "v", "i" }, "<ScrollWheelRight>", function()
+	return tabline_scroll("right")
+end, { expr = true, desc = "Horizontal scroll right or tabline cycle next" })
+
 local function close_buffer()
 	if _G.Snacks and _G.Snacks.bufdelete then
 		_G.Snacks.bufdelete()

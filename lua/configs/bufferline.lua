@@ -28,9 +28,9 @@ return {
 		close_icon = "",
 		left_trunc_marker = "",
 		right_trunc_marker = "",
-		max_name_length = 30,
-		max_prefix_length = 15,
-		tab_size = 20,
+		max_name_length = 18,
+		max_prefix_length = 12,
+		tab_size = 18,
 		diagnostics = false,
 		offsets = {
 			{
@@ -57,5 +57,16 @@ return {
 		},
 		sort_by = "insert_after_current",
 	},
-	highlights = ctp_ok and ctp_bufferline.get_theme() or nil,
+	highlights = ctp_ok and ctp_bufferline.get_theme({
+		custom = {
+			all = {
+				separator = { fg = "#585b70" },
+				separator_visible = { fg = "#585b70" },
+				separator_selected = { fg = "#585b70" },
+				tab_separator = { fg = "#585b70" },
+				tab_separator_selected = { fg = "#585b70" },
+				offset_separator = { fg = "#585b70" },
+			},
+		},
+	}) or nil,
 }
