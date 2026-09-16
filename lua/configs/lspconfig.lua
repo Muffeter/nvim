@@ -21,6 +21,21 @@ local lsp_servers = {
     opt = {},
   },
   {
+    server = "clangd",
+    opt = {
+      cmd = {
+        "clangd",
+        "--background-index",
+        "--background-index-priority=normal",
+        "-j=8",
+        "--all-scopes-completion",
+        "--completion-style=detailed",
+        "--header-insertion=never",
+        "--pch-storage=memory",
+      },
+    },
+  },
+  {
     server = "ts_ls"
   },
   {
@@ -31,6 +46,9 @@ local lsp_servers = {
   }
 }
 for i, v in ipairs(lsp_servers) do
+  if v.opt and next(v.opt) then
+    vim.lsp.config(v.server, v.opt)
+  end
   vim.lsp.enable(v.server)
 end
 

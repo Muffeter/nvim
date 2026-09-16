@@ -21,5 +21,6 @@ require("options")
 require("ui")
 require("neovide")
 require("command")
+require("p4").setup()
 
 -- ref https://neovim.io/doc/user/lua-guide.html

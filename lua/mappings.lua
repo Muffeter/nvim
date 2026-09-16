@@ -1,6 +1,5 @@
 local map = vim.keymap.set
 local unmap = vim.keymap.del
-vim.g.mapleader = "<Space>"
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 
@@ -30,11 +29,48 @@ map("n", "<S-Insert>", '"*p', { desc = "paste" })
 -- neo-tree
 map("n", "<C-\\>", ":Neotree toggle<CR>", { desc = "Toggle the file explorer" })
 
+map("n", "<Tab>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next Buffer Tab" })
+map("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev Buffer Tab" })
+map("n", "]b", "<cmd>BufferLineCycleNext<cr>", { desc = "Next Buffer Tab" })
+map("n", "[b", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev Buffer Tab" })
+map("n", "<A-.>", "<cmd>BufferLineMoveNext<cr>", { desc = "Move Buffer Tab Right" })
+map("n", "<A-,>", "<cmd>BufferLineMovePrev<cr>", { desc = "Move Buffer Tab Left" })
+
+local function close_buffer()
+	if _G.Snacks and _G.Snacks.bufdelete then
+		_G.Snacks.bufdelete()
+	else
+		local bufnr = vim.api.nvim_get_current_buf()
+		vim.cmd("bdelete! " .. bufnr)
+	end
+end
+
+map("n", "<A-w>", close_buffer, { desc = "Close current buffer" })
+map("n", "<leader>bd", close_buffer, { desc = "Close current buffer" })
+map("n", "<leader>bo", "<cmd>BufferLineCloseOthers<cr>", { desc = "Close other buffers" })
+map("n", "<leader>br", "<cmd>BufferLineCloseRight<cr>", { desc = "Close buffers to the right" })
+map("n", "<leader>bl", "<cmd>BufferLineCloseLeft<cr>", { desc = "Close buffers to the left" })
+map("n", "<leader>bp", "<cmd>BufferLineTogglePin<cr>", { desc = "Toggle pin buffer" })
+
+for i = 1, 9 do
+	map("n", "<leader>" .. i, function()
+		require("bufferline").go_to(i, true)
+	end, { desc = "Go to buffer tab " .. i })
+end
+
+map("n", "]c", function() require("p4").next_hunk() end, { desc = "P4 Next Hunk" })
+map("n", "[c", function() require("p4").prev_hunk() end, { desc = "P4 Prev Hunk" })
+map("n", "<leader>pd", function() require("p4").preview_diff() end, { desc = "P4 Preview Diff" })
+map("n", "<leader>po", function() require("p4").opened_files() end, { desc = "P4 Opened Files" })
+map("n", "<leader>pe", function() require("p4").edit_file() end, { desc = "P4 Edit (Checkout)" })
+map("n", "<leader>pr", function() require("p4").refresh() end, { desc = "P4 Refresh Signs" })
+
 -- lspconfig
 map("n", "<C-k>", vim.lsp.buf.hover, { desc = "LSP Hover" })
 map("n", "gd", vim.lsp.buf.definition, { desc = "LSP Definition" })
 map("n", "gi", vim.lsp.buf.implementation, { desc = "LSP Implementation" })
 map("n", "gr", vim.lsp.buf.references, { desc = "LSP References" })
+map("n", "<A-o>", "<cmd>LspClangdSwitchSourceHeader<cr>", { desc = "Switch Source/Header (Clangd)" })
 map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
 map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "LSP Rename" })
 map("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous Diagnostic" })
@@ -48,8 +84,11 @@ map("", "<A-S-f>", function() 	conform.format({ lsp_format = "fallback", async =
 local builtin = require("telescope.builtin")
 map("n", "<C-f>", builtin.current_buffer_fuzzy_find, { desc = "find text in current buffer" })
 map("n", "<C-s>", function()
-	builtin.git_files({ path_display = { "truncate" } })
-end, { desc = "find text across project" })
+	local ok = pcall(builtin.git_files)
+	if not ok then
+		builtin.find_files()
+	end
+end, { desc = "find text across project (git or fallback to find_files)" })
 
 map("i", "jk", "<ESC>")
 map("t", "<c-space>", "<C-\\><C-n>")

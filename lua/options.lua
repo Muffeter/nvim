@@ -5,6 +5,7 @@ local o = vim.o
 local g = vim.g
 
 o.laststatus = 3
+o.showtabline = 2
 o.showmode = false
 
 o.clipboard = "unnamedplus"

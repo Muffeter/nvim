@@ -50,15 +50,106 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		branch = "master",
 		build = ":TSUpdate",
-		opts = {
-			ensure_installed = {
-				"vim",
-				"lua",
-				"vimdoc",
-				"html",
-				"css",
-			},
-		},
+		config = function()
+			-- Fix Windows cmd.exe path separator issue in nvim-treesitter
+			if vim.fn.has("win32") == 1 then
+				require("nvim-treesitter.install").prefer_git = false
+				local shell = require("nvim-treesitter.shell_command_selectors")
+
+				local function normalize_cmd(cmd)
+					if cmd and cmd.opts and cmd.opts.args then
+						for i, arg in ipairs(cmd.opts.args) do
+							if arg:sub(1, 1) ~= "/" and arg:find("/") then
+								cmd.opts.args[i] = arg:gsub("/", "\\")
+							end
+						end
+					end
+					return cmd
+				end
+
+				local orig_rm = shell.select_install_rm_cmd
+				shell.select_install_rm_cmd = function(cache_folder, project_name)
+					return normalize_cmd(orig_rm(cache_folder, project_name))
+				end
+
+				local orig_rm_file = shell.select_rm_file_cmd
+				shell.select_rm_file_cmd = function(file, info_msg)
+					return normalize_cmd(orig_rm_file(file, info_msg))
+				end
+
+				local orig_mkdir = shell.select_mkdir_cmd
+				shell.select_mkdir_cmd = function(directory, cwd, info_msg)
+					return normalize_cmd(orig_mkdir(directory, cwd, info_msg))
+				end
+
+				local orig_mv = shell.select_mv_cmd
+				shell.select_mv_cmd = function(from, to, cwd)
+					return normalize_cmd(orig_mv(from, to, cwd))
+				end
+			end
+
+			require("nvim-treesitter.configs").setup({
+				ensure_installed = {
+					"vim",
+					"lua",
+					"vimdoc",
+					"html",
+					"css",
+					"c_sharp",
+					"cpp",
+					"python",
+				},
+				sync_install = false,
+				auto_install = false,
+				highlight = {
+					enable = true,
+					use_languagetree = true,
+				},
+				indent = {
+					enable = true,
+				},
+			})
+
+			local q = vim.treesitter.query
+			local function unwrap_node(node)
+				if type(node) == "table" and not node.range then
+					return node[1]
+				end
+				return node
+			end
+
+			local aliases = {
+				ex = "elixir",
+				pl = "perl",
+				sh = "bash",
+				uxn = "uxntal",
+				ts = "typescript",
+			}
+
+			q.add_directive("set-lang-from-info-string!", function(match, _, bufnr, pred, metadata)
+				local capture_id = pred[2]
+				local node = unwrap_node(match[capture_id])
+				if not node then
+					return
+				end
+				local injection_alias = vim.treesitter.get_node_text(node, bufnr):lower()
+				local filetype_match = vim.filetype.match({ filename = "a." .. injection_alias })
+				metadata["injection.language"] = filetype_match or aliases[injection_alias] or injection_alias
+			end, { force = true })
+
+			q.add_directive("downcase!", function(match, _, bufnr, pred, metadata)
+				local id = pred[2]
+				local node = unwrap_node(match[id])
+				if not node then
+					return
+				end
+				local text = vim.treesitter.get_node_text(node, bufnr, { metadata = metadata[id] }) or ""
+				if not metadata[id] then
+					metadata[id] = {}
+				end
+				metadata[id].text = string.lower(text)
+			end, { force = true })
+		end,
 	},
 	{
 		-- Compeletion
@@ -99,8 +190,27 @@ return {
 		tag = "0.1.8",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
+			local utils = require("telescope.utils")
+			local orig_is_uri = utils.is_uri
+			utils.is_uri = function(filename)
+				if filename and filename:match("^[a-zA-Z]:[/\\]") then
+					return false
+				end
+				return orig_is_uri(filename)
+			end
+
+			local format_path = function(_, path)
+				local name = path:match("([^/\\]+)$") or path
+				local dir = path:match("^(.-)[/\\][^/\\]+$")
+				if dir and dir ~= "" then
+					return string.format("%s  (%s)", name, dir)
+				end
+				return name
+			end
+
 			require("telescope").setup({
 				defaults = {
+					path_display = format_path,
 					mappings = {
 						i = {
 							["<esc>"] = require("telescope.actions").close,
@@ -124,24 +234,35 @@ return {
 	},
 	-- Using Lazy
 	{
-		"navarasu/onedark.nvim",
+		"catppuccin/nvim",
+		name = "catppuccin",
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
-			require("onedark").setup({
-				style = "darker",
-				highlights = {
-					["@variable"] = { fg = "#91AADF" },
-					["@function"] = { fg = "#FFA066" },
-					["@function.method"] = { fg = "#737c73" },
-					["@constructor"] = { fg = "#b98d7b" },
-					["@keyword.function"] = { fg = "#CF73E6" },
-					["@type.cpp"] = { fg = "#68AD99" },
-					["@variable.parameter"] = { fg = "#b8b4d0" },
-					["@type.builtin"] = { fg = "#c7d7e0" },
+			require("catppuccin").setup({
+				flavour = "mocha", -- latte, frappe, macchiato, mocha
+				transparent_background = false,
+				term_colors = true,
+				integrations = {
+					treesitter = true,
+					native_lsp = {
+						enabled = true,
+						underlines = {
+							errors = { "undercurl" },
+							hints = { "undercurl" },
+							warnings = { "undercurl" },
+							information = { "undercurl" },
+						},
+					},
+					neotree = true,
+					telescope = {
+						enabled = true,
+					},
+					which_key = true,
+					bufferline = true,
 				},
 			})
 			-- Enable theme
-			require("onedark").load()
+			vim.cmd.colorscheme("catppuccin")
 		end,
 	},
 	{
@@ -272,6 +393,10 @@ return {
 			win = {
 				height = { min = 4, max = 15 },
 			},
+			spec = {
+				{ "<leader>b", group = "buffer" },
+				{ "<leader>p", group = "p4 (perforce)" },
+			},
 		},
 		keys = {
 			{
@@ -313,15 +438,17 @@ return {
 	{
 		"akinsho/bufferline.nvim",
 		version = "*",
+		event = { "BufReadPost", "BufNewFile" },
 		dependencies = "nvim-tree/nvim-web-devicons",
-		config = function()
-			require("bufferline").setup({})
+		opts = function()
+			return require("configs.bufferline")
 		end,
 	},
 	{
 		"coffebar/neovim-project",
 		opts = {
 			projects = { -- define project roots
+				"C:/wddm",
 				"D:/workSpace/FISHU3D/CatchFishU3D",
 				"~/AppData/Local/nvim",
 				"D:/workSpace/FISHU3D/CatchFishU3D/Fishing3D/Assets/Editor/unity_tool",
