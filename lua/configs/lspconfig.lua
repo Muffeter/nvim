@@ -32,6 +32,7 @@ local lsp_servers = {
         "--completion-style=detailed",
         "--header-insertion=never",
         "--pch-storage=memory",
+        "--fallback-style=Microsoft",
       },
     },
   },
