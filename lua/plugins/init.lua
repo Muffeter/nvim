@@ -385,6 +385,18 @@ return {
 	{
 		-- For git highlight
 		"lewis6991/gitsigns.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		opts = {},
+	},
+	{
+		"petertriho/nvim-scrollbar",
+		event = { "BufReadPost", "BufNewFile" },
+		dependencies = {
+			"lewis6991/gitsigns.nvim",
+		},
+		config = function()
+			require("configs.scrollbar")
+		end,
 	},
 	{
 		"folke/which-key.nvim",
