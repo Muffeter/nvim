@@ -10,8 +10,8 @@ scrollbar.setup({
 	throttle_ms = 100,
 	handle = {
 		text = " ",
-		blend = 30,
-		highlight = "CursorColumn",
+		blend = 0,
+		highlight = "PmenuThumb",
 		hide_if_all_visible = true,
 	},
 	marks = {
