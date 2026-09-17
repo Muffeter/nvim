@@ -81,7 +81,7 @@ scrollbar.setup({
 	},
 	handlers = {
 		cursor = false,
-		diagnostic = true,
+		diagnostic = false,
 		gitsigns = true,
 		handle = true,
 		search = false,
