@@ -36,26 +36,35 @@ map("n", "[b", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev Buffer Tab" })
 map("n", "<A-.>", "<cmd>BufferLineMoveNext<cr>", { desc = "Move Buffer Tab Right" })
 map("n", "<A-,>", "<cmd>BufferLineMovePrev<cr>", { desc = "Move Buffer Tab Left" })
 
-local function tabline_scroll(direction)
+local function handle_mouse_wheel(action, normal_key)
 	local pos = vim.fn.getmousepos()
 	if pos.screenrow == 1 and pos.winrow == 0 then
-		if direction == "left" then
-			vim.cmd("BufferLineCyclePrev")
-		else
-			vim.cmd("BufferLineCycleNext")
+		local bl_cfg = package.loaded["configs.bufferline"] or require("configs.bufferline")
+		if action == "scroll_left" then
+			bl_cfg.scroll_view("left")
+		elseif action == "scroll_right" then
+			bl_cfg.scroll_view("right")
 		end
 		return ""
 	end
-	return direction == "left" and "6zh" or "6zl"
+	return normal_key
 end
 
+map({ "n", "v", "i" }, "<ScrollWheelUp>", function()
+	return handle_mouse_wheel("scroll_left", "<ScrollWheelUp>")
+end, { expr = true, desc = "Scroll tabline left or scroll window up" })
+
+map({ "n", "v", "i" }, "<ScrollWheelDown>", function()
+	return handle_mouse_wheel("scroll_right", "<ScrollWheelDown>")
+end, { expr = true, desc = "Scroll tabline right or scroll window down" })
+
 map({ "n", "v", "i" }, "<ScrollWheelLeft>", function()
-	return tabline_scroll("left")
-end, { expr = true, desc = "Horizontal scroll left or tabline cycle prev" })
+	return handle_mouse_wheel("scroll_left", "<ScrollWheelLeft>")
+end, { expr = true, desc = "Scroll tabline left or scroll window left" })
 
 map({ "n", "v", "i" }, "<ScrollWheelRight>", function()
-	return tabline_scroll("right")
-end, { expr = true, desc = "Horizontal scroll right or tabline cycle next" })
+	return handle_mouse_wheel("scroll_right", "<ScrollWheelRight>")
+end, { expr = true, desc = "Scroll tabline right or scroll window right" })
 
 local function close_buffer()
 	if _G.Snacks and _G.Snacks.bufdelete then
